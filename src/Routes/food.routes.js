@@ -9,7 +9,7 @@ foodRoutes.post("/food", authenticator, async (req, res) => {
     const newFood = req.body;
     const createFood = await new foodModel(newFood);
     await createFood.save();
-    res.json({ msg: "Food creation successful", createdFood: createFood });
+    res.json({ msg: "Food creation successful", createFood });
   } catch (err) {
     console.error(err);
     res.json(err);
