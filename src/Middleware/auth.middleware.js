@@ -4,7 +4,10 @@ export const authenticator = async (req, res, next) => {
   try {
     const token = req.headers.token;
     if (token) {
-      await jwt.verify(token, process.env.SECRET);
+      const payload = await jwt.verify(token, process.env.SECRET);
+      if (!payload) {
+        res.json("must have valid token");
+      }
       next();
     } else {
       return res.status(403).json("Access Denied");
