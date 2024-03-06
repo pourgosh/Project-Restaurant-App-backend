@@ -15,7 +15,7 @@ const StaffSchema = new mongoose.Schema(
       required: true,
     },
     password: {
-      type: Number,
+      type: String,
       required: true,
     },
     phoneNumber: {
@@ -27,7 +27,6 @@ const StaffSchema = new mongoose.Schema(
     position: {
       type: String,
       enum: ["Owner", "Developer", "Staff"],
-      required: true,
     },
   },
   { timestamps: true }

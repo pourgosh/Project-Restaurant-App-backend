@@ -5,6 +5,8 @@ import { runConfig } from "./src/config/index.js";
 import { errorHandler } from "./src/Error-handling/index.middleware.js";
 import { setConnection as setUpConnection } from "./src/DB/index.js";
 import authRoutes from "./src/Routes/auth.routes.js";
+import staffRoutes from "./src/Routes/staff.routes.js";
+import reservationRoutes from "./src/Routes/reservations.routes.js";
 
 //set up app with express
 const app = express();
@@ -15,6 +17,8 @@ runConfig(app);
 dotEnvConfig();
 
 app.use("/", authRoutes);
+app.use("/", staffRoutes);
+app.use("/", reservationRoutes);
 
 setUpConnection();
 errorHandler(app);

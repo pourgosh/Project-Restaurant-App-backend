@@ -4,21 +4,18 @@ const ReservationSchema = new mongoose.Schema(
   {
     reserver: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "userModel",
+      ref: "user",
     },
     time: {
       type: Date,
-      required: true,
     },
     totalClients: {
       type: Number,
       min: 1,
       max: 10,
-      required: true,
     },
     date: {
       type: Date,
-      required: true,
     },
   },
   { timestamps: true }
