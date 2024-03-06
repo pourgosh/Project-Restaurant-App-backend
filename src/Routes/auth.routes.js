@@ -53,14 +53,4 @@ authRoutes.post("/login", async (req, res, next) => {
   }
 });
 
-authRoutes.get("/verify", authenticator, async (req, res) => {
-  try {
-    console.log("Verification successful");
-    res.json({ message: "Verification successful" });
-  } catch (err) {
-    console.error(err);
-    res.json(err);
-  }
-});
-
 export default authRoutes;

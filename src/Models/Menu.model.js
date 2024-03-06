@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
 const MenuSchema = new mongoose.Schema({
+  test: String,
   food: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "foodModel",
+    ref: "food",
   },
   Drink: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "drinkModel",
+    ref: "drink",
   },
 });
 

@@ -8,6 +8,8 @@ import authRoutes from "./src/Routes/auth.routes.js";
 import staffRoutes from "./src/Routes/staff.routes.js";
 import reservationRoutes from "./src/Routes/reservations.routes.js";
 import foodRoutes from "./src/Routes/food.routes.js";
+import menuRoutes from "./src/Routes/menu.routes.js";
+import userRoutes from "./src/Routes/user.routes.js";
 
 //set up app with express
 const app = express();
@@ -21,6 +23,8 @@ app.use("/", authRoutes);
 app.use("/", staffRoutes);
 app.use("/", reservationRoutes);
 app.use("/", foodRoutes);
+app.use("/", menuRoutes);
+app.use("/", userRoutes);
 
 setUpConnection();
 errorHandler(app);

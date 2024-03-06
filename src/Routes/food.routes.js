@@ -56,7 +56,7 @@ foodRoutes.delete("/food/:_id", authenticator, async (req, res) => {
     const foodID = req.params;
     const updatedData = req.body;
     const foodInDb = await foodModel.findByIdAndDelete(foodID, updatedData);
-    res.json({ msg: "item was delete", foodInDb });
+    res.json({ msg: "item was delete" });
   } catch (err) {
     console.error(err);
     res.json(err);
