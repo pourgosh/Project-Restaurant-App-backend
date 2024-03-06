@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userModel from "../Models/User.model.js";
+import { authenticator } from "../Middleware/auth.middleware.js";
 
 const authRoutes = express.Router();
 
@@ -31,17 +32,20 @@ authRoutes.post("/login", async (req, res, next) => {
     if (!isUserInDb) {
       return res.json("User does not exist!");
     }
-    const isPassValid = bcrypt.compare(newUser.password, isUserInDb.password);
+    const isPassValid = await bcrypt.compare(
+      newUser.password,
+      isUserInDb.password
+    );
     if (!isPassValid) {
       return res.json("email or password is incorrect");
     }
-    const tocken = await jwt.sign({ _id: isUserInDb._id }, process.env.SECRET);
-    if (!tocken) {
+    const token = await jwt.sign({ _id: isUserInDb._id }, process.env.SECRET);
+    if (!token) {
       return res.json("Token creation failed");
     }
     res.json({
       message: "Login was successful",
-      tocken,
+      token,
       userId: isUserInDb._id,
     });
   } catch (err) {
@@ -49,12 +53,14 @@ authRoutes.post("/login", async (req, res, next) => {
   }
 });
 
-// authRoutes.get("/verify", async (req, res, next) => {
-//   try {
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json("Internal Server Error");
-//   }
-// });
+authRoutes.get("/verify", authenticator, async (req, res) => {
+  try {
+    console.log("Verification successful");
+    res.json({ message: "Verification successful" });
+  } catch (err) {
+    console.error(err);
+    res.json(err);
+  }
+});
 
 export default authRoutes;

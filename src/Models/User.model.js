@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
     favourites: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "foodModel",
+        ref: "food",
       },
     ],
     reservations: [
