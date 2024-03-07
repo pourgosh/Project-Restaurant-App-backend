@@ -56,6 +56,9 @@ staffRoutes.post("/staff/login", async (req, res, next) => {
 staffRoutes.get("/staff", async (req, res, next) => {
   try {
     const staffInDb = await staffModel.find();
+    if (!staffInDb) {
+      return res.json("Staffs not found");
+    }
     res.json(staffInDb);
   } catch (err) {
     console.error(err);
@@ -66,7 +69,10 @@ staffRoutes.get("/staff/:_id", async (req, res, next) => {
   try {
     const staffID = req.params;
     const staffInDb = await staffModel.findById(staffID);
-    res.json({ staffInDb });
+    if (!staffInDb) {
+      return res.json("Staff member not found");
+    }
+    res.json(staffInDb);
   } catch (err) {
     console.error(err);
   }

@@ -18,7 +18,7 @@ menuRoutes.post("/menu", authenticator, async (req, res) => {
 
 menuRoutes.get("/menu", async (req, res) => {
   try {
-    const itemsInDb = await menuModel.find(); /*.populate(["food", "drink"])*/
+    const itemsInDb = await menuModel.find().populate(["food", "drink"]);
 
     res.json(itemsInDb);
   } catch (err) {
@@ -30,8 +30,9 @@ menuRoutes.get("/menu", async (req, res) => {
 menuRoutes.get("/menu/:_id", async (req, res) => {
   try {
     const menuID = req.params;
-    const itemInDb = await menuModel.findById(menuID);
-    /*.populate(["food", "drink"])*/
+    const itemInDb = await menuModel
+      .findById(menuID)
+      .populate(["food", "drink"]);
     if (!itemInDb) {
       res.json("item not found");
     }
@@ -59,7 +60,7 @@ menuRoutes.put("/menu/:_id", authenticator, async (req, res) => {
 menuRoutes.delete("/menu/:_id", authenticator, async (req, res) => {
   try {
     const menuID = req.params;
-    const itemInDb = await menuModel.findByIdAndDelete(menuID, newItem);
+    const itemInDb = await menuModel.findByIdAndDelete(menuID);
     res.json({ msg: "item was deleted successful" });
   } catch (err) {
     console.error(err);
