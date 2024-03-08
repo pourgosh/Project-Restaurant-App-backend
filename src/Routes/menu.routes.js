@@ -61,7 +61,7 @@ menuRoutes.delete("/menu/:_id", authenticator, async (req, res) => {
   try {
     const menuID = req.params;
     const itemInDb = await menuModel.findByIdAndDelete(menuID);
-    res.json({ msg: "item was deleted successful" });
+    res.json({ msg: "menu item was deleted successful" });
   } catch (err) {
     console.error(err);
     res.json(err);

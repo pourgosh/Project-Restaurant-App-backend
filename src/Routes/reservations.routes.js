@@ -64,7 +64,7 @@ reservationRoutes.delete(
       const reservationsInDb = await reservationModel.findByIdAndDelete(
         reservationID
       );
-      res.json({ msg: "delete successful", reservationsInDb });
+      res.json({ msg: "delete successful" });
     } catch (err) {
       console.error(err);
       res.json(err);

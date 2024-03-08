@@ -35,7 +35,9 @@ userRoutes.put("/users/:_id", authenticator, async (req, res) => {
   try {
     const userID = req.params;
     const newData = req.body;
-    const userInDb = await userModel.findByIdAndUpdate(userID, newData);
+    const userInDb = await userModel.findByIdAndUpdate(userID, newData, {
+      new: true,
+    });
     res.json({ msg: "update successful", userInDb });
   } catch (err) {
     console.error(err);
