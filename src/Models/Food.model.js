@@ -25,6 +25,7 @@ const FoodSchema = new mongoose.Schema({
   category: {
     type: String,
     enum: ["Vegetarian", "Steak", "Burger", "Finger-food", "Desert"],
+    required: true,
   },
   price: {
     type: Number,
