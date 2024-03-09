@@ -2,6 +2,8 @@ import express from "express";
 import staffModel from "../Models/Staff.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { authenticator } from "../Middleware/auth.middleware.js";
+
 const staffRoutes = express.Router();
 
 staffRoutes.post("/staff/register", async (req, res) => {
@@ -53,7 +55,7 @@ staffRoutes.post("/staff/login", async (req, res, next) => {
   }
 });
 
-staffRoutes.get("/staff", async (req, res, next) => {
+staffRoutes.get("/staff", authenticator, async (req, res, next) => {
   try {
     const staffInDb = await staffModel.find();
     if (!staffInDb) {
@@ -65,7 +67,7 @@ staffRoutes.get("/staff", async (req, res, next) => {
   }
 });
 
-staffRoutes.get("/staff/:_id", async (req, res, next) => {
+staffRoutes.get("/staff/:_id", authenticator, async (req, res, next) => {
   try {
     const staffID = req.params;
     const staffInDb = await staffModel.findById(staffID);
@@ -78,7 +80,7 @@ staffRoutes.get("/staff/:_id", async (req, res, next) => {
   }
 });
 
-staffRoutes.put("/staff/:_id", async (req, res, next) => {
+staffRoutes.put("/staff/:_id", authenticator, async (req, res, next) => {
   try {
     const staffID = req.params;
     const updatedInfo = req.body;
@@ -91,7 +93,7 @@ staffRoutes.put("/staff/:_id", async (req, res, next) => {
   }
 });
 
-staffRoutes.delete("/staff/:_id", async (req, res, next) => {
+staffRoutes.delete("/staff/:_id", authenticator, async (req, res, next) => {
   try {
     const staffID = req.params;
     const staffInDb = await staffModel.findByIdAndDelete(staffID);
