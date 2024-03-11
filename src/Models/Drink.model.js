@@ -21,6 +21,9 @@ const DrinkSchema = new mongoose.Schema({
     enum: ["Alcoholic", "non-Alcoholic"],
     required: true,
   },
+  image: {
+    type: String,
+  },
 });
 
 const drinkModel = mongoose.model("drink", DrinkSchema);
