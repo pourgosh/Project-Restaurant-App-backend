@@ -38,7 +38,9 @@ authRoutes.post("/login", async (req, res, next) => {
     if (!isPassValid) {
       return res.json("email or password is incorrect");
     }
-    const token = await jwt.sign({ _id: isUserInDb._id }, process.env.SECRET);
+    const token = await jwt.sign({ _id: isUserInDb._id }, process.env.SECRET, {
+      expiresIn: "3h",
+    });
     if (!token) {
       return res.json("Token creation failed");
     }
