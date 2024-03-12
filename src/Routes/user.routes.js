@@ -6,7 +6,7 @@ const userRoutes = express.Router();
 
 userRoutes.get("/users", authenticator, async (req, res) => {
   try {
-    const usersInDb = await userModel.find();
+    const usersInDb = await userModel.find().populate(["reservations"]);
     if (!usersInDb) {
       return res.json("no users found");
     }
@@ -20,7 +20,9 @@ userRoutes.get("/users", authenticator, async (req, res) => {
 userRoutes.get("/users/:_id", authenticator, async (req, res) => {
   try {
     const userID = req.params;
-    const userInDb = await userModel.findById(userID);
+    const userInDb = await userModel
+      .findById(userID)
+      .populate(["reservations"]);
     if (!userInDb) {
       return res.json("no user found");
     }

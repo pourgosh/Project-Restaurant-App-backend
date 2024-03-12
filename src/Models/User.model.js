@@ -36,9 +36,12 @@ const UserSchema = new mongoose.Schema(
     reservations: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "reservationModel",
+        ref: "reservation",
       },
     ],
+    avatar: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
